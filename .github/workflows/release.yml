@@ -98,6 +98,9 @@ jobs:
           artifacts: "launcher-files/*,iw4x-release/*"
           artifactErrorsFailBuild: true
           allowUpdates: true
-          draft: true
+          # Flip the release to published once artifacts are uploaded. The
+          # first ncipollo step (create-release job) still creates as draft
+          # so users never see an empty release mid-build.
+          draft: false
           omitBodyDuringUpdate: true
-          omitDraftDuringUpdate: true
+          omitDraftDuringUpdate: false
