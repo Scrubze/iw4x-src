@@ -11,7 +11,7 @@ namespace Components
 #ifdef _DEBUG
 	constexpr auto* BUILD_TYPE = "IW4x_DEV MP";
 #else
-	constexpr auto* BUILD_TYPE = "IW4x MP";
+	constexpr auto* BUILD_TYPE = "IW4x MP [custom]";
 #endif
 
 	void Branding::CG_DrawVersion()
@@ -100,7 +100,7 @@ namespace Components
 		RegisterBrandingDvars();
 
 		// UI version string
-		Utils::Hook::Set<const char*>(0x43F73B, "IW4x " REVISION_STR);
+		Utils::Hook::Set<const char*>(0x43F73B, "IW4x SLB CUSTOM");
 
 		// Short version dvar
 		Utils::Hook::Set<const char*>(0x60BD91, REVISION_STR);

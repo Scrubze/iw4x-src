@@ -336,6 +336,19 @@ namespace Components
 
 	const char* FileSystem::Sys_DefaultInstallPath_Hk()
 	{
+		// SLB custom: prefer BASE_INSTALL (the user's Modern Warfare 2 folder)
+		// over cwd so zone (.ff) loading -- which goes through this function
+		// directly from FastFiles.cpp rather than the fs_basepath search path
+		// -- resolves to the original game files even when iw4x.exe is
+		// launched from a separate writable location (e.g. our SLB launcher
+		// install under LocalAppData). Mirrors what Sys_HomePath_Hk already
+		// does below.
+		const auto base = Utils::GetBaseFilesLocation();
+		if (!base.empty())
+		{
+			static auto basePath = base.string();
+			return basePath.data();
+		}
 		static auto current_path = std::filesystem::current_path().string();
 		return current_path.data();
 	}
